@@ -421,7 +421,7 @@
         "name": "Invoices",
         "nav": true,
         "page_id": "invoices",
-        "source": "web/src/app/features/invoices/invoices.component.ts",
+        "source": "web/src/app/features/invoice-generation/invoice-generation.component.ts",
         "story": "invoice-generation",
         "url": "/invoices"
       },
