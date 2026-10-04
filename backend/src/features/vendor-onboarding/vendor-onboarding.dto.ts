@@ -1,8 +1,19 @@
 // VendorOnboarding DTOs
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export interface PostApiVendorProfileRequestDto {
-  companyName: string;
-  contactEmail: string;
+export class CreateVendorProfileDto {
+  @IsString()
+  @IsNotEmpty()
+  companyName!: string;
+
+  @IsEmail()
+  contactEmail!: string;
+}
+
+export class CreateDocumentDto {
+  @IsString()
+  @IsNotEmpty()
+  filename!: string;
 }
 
 export interface PostApiVendorProfileResponseDto {
@@ -11,17 +22,10 @@ export interface PostApiVendorProfileResponseDto {
   contactEmail: string;
 }
 
-export interface PostApiVendorDocumentsRequestDto {
-  filename: string;
-}
-
 export interface PostApiVendorDocumentsResponseDto {
   id: string;
   filename: string;
   status: string;
-}
-
-export interface GetApiVendorDocumentsRequestDto {
 }
 
 export interface GetApiVendorDocumentsResponseDto {
