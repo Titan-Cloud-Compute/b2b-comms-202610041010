@@ -41,7 +41,7 @@ function uuid(): string {
 /** Register in-memory mocks for the order endpoints when running against MockApiClient. */
 function registerOrderMocks(client: MockApiClient): void {
   const orders: Order[] = [];
-  client.registerMock('GET', '/api/vendors', async () => MOCK_VENDORS);
+  client.registerMock('GET', '/api/orders/vendors', async () => MOCK_VENDORS);
   client.registerMock('GET', '/api/orders', async () => orders);
   client.registerMock('POST', '/api/orders', async (body: any) => {
     const order: Order = {
@@ -156,7 +156,7 @@ export class OrdersComponent implements OnInit {
 
   async loadVendors(): Promise<void> {
     try {
-      this.vendors = await this.api.get<VendorOption[]>('/api/vendors');
+      this.vendors = await this.api.get<VendorOption[]>('/api/orders/vendors');
     } catch {
       this.vendors = [];
     }
