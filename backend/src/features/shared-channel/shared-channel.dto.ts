@@ -1,28 +1,25 @@
 // SharedChannel DTOs
+import { z } from 'zod';
 
-export interface PostApiChannelsRequestDto {
-  name: string;
-}
+export const CreateChannelSchema = z.object({
+  name: z.string().trim().min(1),
+});
 
-export interface PostApiChannelsResponseDto {
+export type CreateChannelDto = z.infer<typeof CreateChannelSchema>;
+
+export const PostMessageSchema = z.object({
+  body: z.string().trim().min(1),
+});
+
+export type PostMessageDto = z.infer<typeof PostMessageSchema>;
+
+export interface ChannelResponseDto {
   id: string;
   name: string;
 }
 
-export interface PostApiChannelsIdMessagesRequestDto {
-  body: string;
-}
-
-export interface PostApiChannelsIdMessagesResponseDto {
+export interface MessageResponseDto {
   id: string;
   body: string;
   channelId: string;
-}
-
-export interface GetApiChannelsRequestDto {
-}
-
-export interface GetApiChannelsResponseDto {
-  id: string;
-  name: string;
 }
