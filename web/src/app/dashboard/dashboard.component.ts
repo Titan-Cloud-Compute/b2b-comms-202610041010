@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div class="dashboard-page" data-placeholder>
+    <div class="page dashboard-page" data-placeholder>
       <header class="page-header">
         <h1>Dashboard</h1>
         <p class="subtitle">Welcome to the platform.</p>
@@ -28,18 +28,18 @@ import { FormsModule } from '@angular/forms';
     </div>
   `,
   styles: [`
-    .dashboard-page {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
+    .page.dashboard-page {
+      max-width: var(--dashboard-max-width);
+      padding: var(--space-7) var(--space-4);
+      gap: 0;
     }
     .page-header {
-      margin-bottom: 2rem;
+      margin-bottom: var(--space-7);
     }
     h1 {
       font-size: var(--font-size-xl);
       color: var(--color-text-primary);
-      margin: 0 0 0.25rem;
+      margin: 0 0 var(--space-1);
     }
     .subtitle {
       color: var(--color-text-secondary);
@@ -47,24 +47,24 @@ import { FormsModule } from '@angular/forms';
       margin: 0;
     }
     .placeholder-card {
-      background: white;
+      background: var(--color-white);
       border-radius: var(--radius-card);
-      border: 1px solid var(--color-border);
-      padding: 2rem;
+      border: var(--border-width) solid var(--color-border);
+      padding: var(--space-7);
     }
     .placeholder-text {
       color: var(--color-text-secondary);
-      margin: 0 0 1.5rem;
+      margin: 0 0 var(--space-6);
     }
     .placeholder-form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: var(--space-4);
     }
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.375rem;
+      gap: var(--space-1-5);
     }
     .form-group label {
       font-size: var(--font-size-sm);
@@ -72,25 +72,25 @@ import { FormsModule } from '@angular/forms';
       color: var(--color-text-primary);
     }
     .form-group input {
-      padding: 0.625rem 0.75rem;
-      font-size: var(--font-size-input, 1rem);
-      border: 1px solid var(--color-gray-300);
+      padding: var(--space-2-5) var(--space-3);
+      font-size: var(--font-size-input);
+      border: var(--border-width) solid var(--color-gray-300);
       border-radius: var(--radius-btn);
-      background: white;
-      min-height: 44px;
+      background: var(--color-white);
+      min-height: var(--touch-target);
     }
     .btn-primary {
       align-self: flex-start;
-      padding: 0.625rem 1.5rem;
+      padding: var(--space-2-5) var(--space-6);
       font-size: var(--font-size-sm);
       font-weight: 600;
-      color: white;
+      color: var(--color-white);
       background: var(--color-primary);
       border: none;
       border-radius: var(--radius-btn);
       cursor: not-allowed;
       opacity: 0.6;
-      min-height: 44px;
+      min-height: var(--touch-target);
     }
   `]
 })

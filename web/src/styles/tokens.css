@@ -206,3 +206,18 @@
   --control-height-sm: 28px;
   --icon-size-md: 22px;
 }
+
+/* ---- Visual system: off-scale layout and type-detail tokens used by dashboard/admin ---- */
+:root {
+  --dashboard-max-width: 50rem;       /* 800px */
+  --page-max-width-admin: 75rem;      /* 1200px */
+  --modal-max-width: 30rem;           /* 480px */
+  --form-max-width: 40rem;            /* 640px */
+  --grid-tile-min: 12.5rem;           /* 200px — minmax floor and menu min-width */
+  --grid-card-min: 15rem;             /* 240px */
+  --grid-panel-min: 20rem;            /* 320px */
+  --input-filter-min-width: 14rem;    /* 224px — search input */
+  --detail-label-width: 10rem;        /* 160px — dt column in detail-grid */
+  --letter-spacing-base: 0.04em;      /* secondary label letter-spacing */
+  --letter-spacing-micro: 0.02em;     /* mono display letter-spacing */
+}

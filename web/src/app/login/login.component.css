@@ -1,3 +1,21 @@
+/* Nullify the global .page layout on the login root — login fills 100vh and
+   controls its own padding via .form-panel, so the generic .page defaults
+   (max-width, padding, gap, .page > div card rules) must not apply. */
+.page.login-page {
+  max-width: 100%;
+  padding: 0;
+  gap: 0;
+}
+.page.login-page > div,
+.page.login-page > section,
+.page.login-page > form {
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
 .login-page {
   height: 100svh;
   height: 100vh;

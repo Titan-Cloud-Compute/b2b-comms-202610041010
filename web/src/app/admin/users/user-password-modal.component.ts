@@ -55,16 +55,16 @@ import { ToastService } from '../../shared/api/toast.service';
     </div>
   `,
   styles: [`
-    .modal-backdrop { position: fixed; inset: 0; background: var(--color-overlay-brand); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 1000; }
-    .modal-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-modal); width: 100%; max-width: 480px; }
-    h2 { font-size: var(--font-size-xl); color: var(--color-text-primary); margin: 0 0 0.75rem; }
-    .lead { font-size: var(--font-size-md); color: var(--color-text-secondary); margin: 0 0 1.25rem; line-height: 1.5; }
+    .modal-backdrop { position: fixed; inset: 0; background: var(--color-overlay-brand); display: flex; align-items: center; justify-content: center; padding: var(--space-4); z-index: 1000; }
+    .modal-card { background: var(--color-white); border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: var(--shadow-modal); width: 100%; max-width: var(--modal-max-width); }
+    h2 { font-size: var(--font-size-xl); color: var(--color-text-primary); margin: 0 0 var(--space-3); }
+    .lead { font-size: var(--font-size-md); color: var(--color-text-secondary); margin: 0 0 var(--space-5); line-height: 1.5; }
     .lead.unavailable { color: var(--color-warning-700); }
-    .password-row { display: flex; align-items: stretch; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .password-value { flex: 1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--font-size-lg); letter-spacing: 0.02em; background: var(--color-neutral-100); border: 1px solid var(--color-gray-300); border-radius: var(--radius-btn); padding: 0.75rem; color: var(--color-text-primary); word-break: break-all; display: flex; align-items: center; }
-    .copy-btn { flex: 0 0 auto; padding: 0.625rem 1.25rem; font-size: var(--font-size-sm); font-weight: 600; color: white; background: var(--color-info); border: none; border-radius: var(--radius-btn); cursor: pointer; min-height: 44px; }
+    .password-row { display: flex; align-items: stretch; gap: var(--space-2); margin-bottom: var(--space-6); }
+    .password-value { flex: 1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--font-size-lg); letter-spacing: var(--letter-spacing-micro); background: var(--color-neutral-100); border: var(--border-width) solid var(--color-gray-300); border-radius: var(--radius-btn); padding: var(--space-3); color: var(--color-text-primary); word-break: break-all; display: flex; align-items: center; }
+    .copy-btn { flex: 0 0 auto; padding: var(--space-2-5) var(--space-5); font-size: var(--font-size-sm); font-weight: 600; color: var(--color-white); background: var(--color-info); border: none; border-radius: var(--radius-btn); cursor: pointer; min-height: var(--touch-target); }
     .modal-actions { display: flex; justify-content: flex-end; }
-    .close-btn { padding: 0.625rem 1.25rem; font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-secondary); background: var(--color-neutral-100); border: 1px solid var(--color-gray-300); border-radius: var(--radius-btn); cursor: pointer; min-height: 44px; }
+    .close-btn { padding: var(--space-2-5) var(--space-5); font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-secondary); background: var(--color-neutral-100); border: var(--border-width) solid var(--color-gray-300); border-radius: var(--radius-btn); cursor: pointer; min-height: var(--touch-target); }
   `]
 })
 export class UserPasswordModalComponent {

@@ -17,7 +17,7 @@ type AdminTab = 'overview' | 'users' | 'app-settings';
     AdminUsersComponent,
   ],
   template: `
-    <div class="admin-page" data-placeholder>
+    <div class="page admin-page" data-placeholder>
       <header class="page-header">
         <div>
           <h1>{{ getTabTitle() }}</h1>
@@ -51,33 +51,34 @@ type AdminTab = 'overview' | 'users' | 'app-settings';
       min-height: 0;
     }
 
-    .admin-page {
-      max-width: 1200px;
+    .page.admin-page {
+      max-width: var(--page-max-width-admin);
       width: 100%;
       margin: 0 auto;
       background: var(--color-bg-secondary);
-      padding: 1rem;
+      padding: var(--space-4);
       box-sizing: border-box;
       flex: 1 1 auto;
       min-height: 0;
       display: flex;
       flex-direction: column;
+      gap: 0;
     }
 
     .page-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--space-6);
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: var(--space-4);
       flex: 0 0 auto;
     }
 
     h1 {
       font-size: var(--font-size-xl);
       color: var(--color-text-primary);
-      margin-bottom: 0.25rem;
+      margin-bottom: var(--space-1);
     }
 
     .subtitle {
@@ -88,14 +89,14 @@ type AdminTab = 'overview' | 'users' | 'app-settings';
     .last-updated {
       color: var(--color-text-secondary);
       font-size: var(--font-size-sm);
-      margin-bottom: 0.25rem;
+      margin-bottom: var(--space-1);
     }
 
     .header-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
       background: var(--color-warning-100);
       color: var(--color-warning-800);
       border-radius: var(--radius-btn);

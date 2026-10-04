@@ -1,3 +1,21 @@
+/* Nullify the global .page layout on the signup root — signup is a centred
+   card layout and controls its own padding, so the generic .page defaults
+   (max-width, gap, .page > div card rules) must not apply. */
+.page.signup-container {
+  max-width: 100%;
+  padding: var(--space-4);
+  gap: 0;
+}
+.page.signup-container > div,
+.page.signup-container > section,
+.page.signup-container > form {
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
 .signup-container {
   min-height: 100svh;
   min-height: 100vh;

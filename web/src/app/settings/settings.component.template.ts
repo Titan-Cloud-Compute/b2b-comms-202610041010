@@ -3,7 +3,7 @@
  *  move — the markup is unchanged. Mirrors intake.component.styles.ts and
  *  integrations.component.template.ts. */
 export const settingsComponentTemplate = `
-    <div class="settings-page" data-placeholder>
+    <div class="page settings-page" data-placeholder>
       <header class="page-header">
         <h1>{{ 'Settings' }}</h1>
         <p class="muted">{{ 'Manage your profile and preferences.' }}</p>
