@@ -1,8 +1,11 @@
 // CustomerInvite DTOs
+import { z } from 'zod';
 
-export interface PostApiAdminCustomersInviteRequestDto {
-  email: string;
-}
+export const PostApiAdminCustomersInviteRequestSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+});
+
+export type PostApiAdminCustomersInviteRequestDto = z.infer<typeof PostApiAdminCustomersInviteRequestSchema>;
 
 export interface PostApiAdminCustomersInviteResponseDto {
   customerId: string;
