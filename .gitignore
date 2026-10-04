@@ -25,3 +25,6 @@ npm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# TypeScript incremental build cache (stale copies suppress emit in Docker builds)
+*.tsbuildinfo
