@@ -17,7 +17,7 @@ import { TokenModelResolver } from './signup-admin-model';
   imports: [CommonModule, FormsModule, RouterLink],
   styleUrl: './signup.component.css',
   template: `
-    <div class="signup-container">
+    <div class="page signup-container">
       <div class="signup-card">
         <div class="logo">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
