@@ -206,3 +206,19 @@
   --control-height-sm: 28px;
   --icon-size-md: 22px;
 }
+
+/* ---- Visual system: layout sizes, grid columns, letter-spacing ---- */
+:root {
+  --page-max-width-sm: 50rem;          /* 800px — dashboard/article content */
+  --admin-max-width: 75rem;            /* 1200px — wide admin layout */
+  --touch-target-sm: 2.25rem;          /* 36px — compact action buttons */
+  --modal-max-width: 30rem;            /* 480px — confirm/reveal modals */
+  --form-max-width: 40rem;             /* 640px — create/edit card */
+  --grid-min-sm: 12.5rem;              /* 200px — small auto-fill grid min */
+  --grid-min-md: 15rem;                /* 240px — medium auto-fill grid min */
+  --grid-min-lg: 20rem;                /* 320px — large auto-fill grid min */
+  --detail-col-width: 10rem;           /* 160px — detail-grid label column */
+  --filter-search-min-width: 14rem;    /* 224px — filter search input */
+  --letter-spacing-2xs: 0.02em;
+  --letter-spacing-xs: 0.04em;
+}

@@ -26,7 +26,7 @@ import { PREVIEW_MODE } from '../shared/preview/preview-mode';
     ])
   ],
   template: `
-    <div class="login-page" @fadeIn>
+    <div class="page login-page" @fadeIn>
       <div class="login-container">
         <!-- Sign-in form only. The brand copy and product journey live on the
              public /about page (linked below) so nothing competes with the
