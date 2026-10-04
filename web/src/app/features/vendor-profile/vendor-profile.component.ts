@@ -24,7 +24,7 @@ interface VendorDocument {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="vendor-profile-screen">
+    <div class="page" data-testid="vendor-profile-screen">
       <h1>Vendor Profile</h1>
 
       <section>

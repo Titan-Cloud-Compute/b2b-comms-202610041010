@@ -4,7 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { SafeHtmlPipe } from '../safe-html.pipe';
 import { AuthApi } from '../api/auth-api.service';
-import { FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP } from './nav-items';
+import { FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP, groupNavItems } from './nav-items';
 import { SIDEBAR_TEMPLATE } from './sidebar.template';
 
 @Component({
@@ -80,6 +80,12 @@ import { SIDEBAR_TEMPLATE } from './sidebar.template';
       gap: 0.125rem;
       overflow-y: auto;
       overscroll-behavior-y: contain;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-0);
     }
 
     .nav-group-label {
@@ -385,6 +391,12 @@ export class SidebarComponent {
   readonly adminNavItems = ADMIN_NAV_ITEMS;
   // Rendered for every role (see SHARED_NAV_ITEMS) — outside the role branches.
   readonly sharedNavItems = SHARED_NAV_ITEMS;
+
+  /** Feature nav grouped into Main / Vendor / Customer / Admin. The admin
+   *  console has its own landing, so the Main (Dashboard) group is hidden there. */
+  navGroups = computed(() =>
+    groupNavItems(this.firmNavItems).filter(g => g.key !== 'main' || !this.auth.hasAdminRole()),
+  );
 
   auth = inject(AuthService);
   private router = inject(Router);

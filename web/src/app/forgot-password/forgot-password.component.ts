@@ -67,7 +67,7 @@ import { AuthApi } from '../shared/api/auth-api.service';
     .form-panel {
       background: white;
       border-radius: var(--radius-md, 0.75rem);
-      box-shadow: var(--shadow-card, 0 1px 8px rgba(0,0,0,.08));
+      box-shadow: var(--shadow-card);
       padding: 2rem;
     }
     .form-title { margin: 0 0 0.5rem; font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary, #0f172a); }

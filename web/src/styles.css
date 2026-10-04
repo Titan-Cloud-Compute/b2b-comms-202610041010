@@ -58,8 +58,8 @@ body {
   font-family: var(--font-body);
   background: var(--color-bg-secondary);
   color: var(--color-text-primary);
-  line-height: 1.5;
-  font-size: 15px;
+  line-height: var(--line-height-body);
+  font-size: var(--font-size-base);
   min-height: 100svh;
   min-height: 100vh;
   overscroll-behavior-y: contain;
@@ -78,16 +78,16 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  margin: 0 0 0.5rem;
-  font-weight: 600;
-  line-height: 1.25;
+  margin: 0 0 var(--space-2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 }
 
 /* Design-system typography utility classes */
 .heading-2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 }
 
 p {
@@ -111,7 +111,7 @@ button {
 
 /* Ensure inputs don't zoom on iOS */
 input, textarea, select {
-  font-size: 16px;
+  font-size: var(--font-size-input);
 }
 
 /* Smooth scrolling */
@@ -121,8 +121,8 @@ html {
 
 /* Focus styles for accessibility - light theme */
 :focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: var(--focus-ring-width) solid var(--color-primary);
+  outline-offset: var(--focus-ring-width);
 }
 
 /* Hide scrollbar but keep functionality */
@@ -137,8 +137,8 @@ html {
 
 /* Custom scrollbar for webkit browsers - light theme */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track {
@@ -147,7 +147,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -187,22 +187,22 @@ html {
 .mode-toggle .mode-option::after {
   content: attr(title);
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + var(--space-2));
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
   width: max-content;
-  max-width: 220px;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
+  max-width: var(--tooltip-max-width);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
   background: var(--color-text-primary);
   color: var(--color-white);
-  font-size: 0.6875rem;
-  font-weight: 400;
-  line-height: 1.35;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
   white-space: normal;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(14, 23, 38, 0.22);
+  box-shadow: var(--shadow-tooltip);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -265,4 +265,211 @@ body:has(app-intake .chat-window) app-root > app-intake > .intake-page {
 
 body:has(app-intake .chat-window) app-root > app-support-footer {
   flex: 0 0 auto;
+}
+
+/* ── Page primitives (styling card) ─────────────────────────────────────────
+ * One token-only visual system for every routed feature page. A page root
+ * carries class="page"; headings, panels (section/form), fields, buttons,
+ * tables and lists inside it pick up the shared look. Colour, type and
+ * spacing come only from styles/tokens.css. */
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-width);
+  min-width: 0;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.page > h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.page h2 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.page h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-md);
+}
+
+.page p {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+}
+
+/* Panels: top-level sections and forms read as cards. */
+.page > section,
+.page > form,
+.page > div {
+  min-width: 0;
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.page form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.page label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.page input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.page select,
+.page textarea {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-height: var(--control-height);
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: var(--font-size-input);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-btn);
+}
+
+.page input[type="file"] {
+  max-width: 100%;
+  font-size: var(--font-size-sm);
+}
+
+.page input[type="checkbox"],
+.page input[type="radio"] {
+  accent-color: var(--color-primary);
+  margin-right: var(--space-2);
+}
+
+.page input:focus,
+.page select:focus,
+.page textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.page button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.page button:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.page button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.page table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.page th,
+.page td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: var(--border-width) solid var(--color-border-light);
+}
+
+.page th {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
+}
+
+.page ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.page li {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-secondary);
+  border: var(--border-width) solid var(--color-border-light);
+  border-radius: var(--radius-btn);
+}
+
+/* Clickable list rows (e.g. ChannelList). */
+.page .list-item-action {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+
+.page .list-item-action:hover {
+  background: var(--color-surface-hover);
+}
+
+.page .list-item-action.selected {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: var(--space-4) var(--space-3) var(--space-6);
+    gap: var(--space-4);
+  }
+
+  .page > section,
+  .page > form,
+  .page > div {
+    padding: var(--space-4);
+  }
+
+  .page table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .page button {
+    align-self: stretch;
+  }
 }

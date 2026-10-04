@@ -59,3 +59,44 @@ FIRM_NAV_ITEMS.push(
   { path: '/admin/audit-log', label: 'Audit Log', icon: '' },
 );
 // <<codegen:nav-items:end>>
+
+/** Sidebar nav groups (styling card: Main / Vendor / Customer / Admin). */
+export type NavGroupKey = 'main' | 'vendor' | 'customer' | 'admin';
+
+export interface NavGroup {
+  key: NavGroupKey;
+  label: string;
+  items: NavItem[];
+}
+
+export const NAV_GROUP_LABELS: Record<NavGroupKey, string> = {
+  main: 'Main',
+  vendor: 'Vendor',
+  customer: 'Customer',
+  admin: 'Admin',
+};
+
+const NAV_GROUP_ORDER: NavGroupKey[] = ['main', 'vendor', 'customer', 'admin'];
+
+/** Which sidebar group each route belongs to; unknown paths fall back to Main. */
+export const NAV_GROUP_BY_PATH: Record<string, NavGroupKey> = {
+  '/dashboard': 'main',
+  '/vendor/profile': 'vendor',
+  '/channels': 'vendor',
+  '/invoices': 'vendor',
+  '/settings/notifications': 'vendor',
+  '/orders': 'customer',
+  '/admin/customers': 'admin',
+  '/admin/audit-log': 'admin',
+};
+
+/** Bucket nav items into ordered, non-empty groups. */
+export function groupNavItems(items: NavItem[]): NavGroup[] {
+  return NAV_GROUP_ORDER
+    .map((key) => ({
+      key,
+      label: NAV_GROUP_LABELS[key],
+      items: items.filter((i) => (NAV_GROUP_BY_PATH[i.path] ?? 'main') === key),
+    }))
+    .filter((g) => g.items.length > 0);
+}

@@ -21,20 +21,22 @@ export const SIDEBAR_TEMPLATE = `
       }
 
       <nav class="sidebar-nav">
-        @if (!auth.hasAdminRole()) {
-          <div class="nav-group-label">{{ 'Workspace' }}</div>
-          @for (item of firmNavItems; track item.label) {
-            <a
-              [routerLink]="item.path"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact: item.path === '/dashboard' || item.path === '/learning'}"
-              class="nav-item"
-              (click)="navClick.emit()"
-            >
-              <span class="nav-icon" [innerHTML]="item.icon | safeHtml"></span>
-              <span class="nav-label">{{ item.label }}</span>
-            </a>
-          }
+        @for (group of navGroups(); track group.key) {
+          <div class="nav-group" [attr.data-nav-group]="group.key">
+            <div class="nav-group-label">{{ group.label }}</div>
+            @for (item of group.items; track item.path) {
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: item.path === '/dashboard' || item.path === '/settings'}"
+                class="nav-item"
+                (click)="navClick.emit()"
+              >
+                <span class="nav-icon" [innerHTML]="item.icon | safeHtml"></span>
+                <span class="nav-label">{{ item.label }}</span>
+              </a>
+            }
+          </div>
         }
 
         @if (auth.hasAdminRole()) {
@@ -57,7 +59,9 @@ export const SIDEBAR_TEMPLATE = `
         <!-- Role-agnostic entries (saved searches): every signed-in user owns
              their own saved searches, so this group renders outside both role
              branches above. -->
+        @if (sharedNavItems.length) {
         <div class="nav-group-label">{{ 'Personal' }}</div>
+        }
         @for (item of sharedNavItems; track item.label) {
           <a
             [routerLink]="item.path"

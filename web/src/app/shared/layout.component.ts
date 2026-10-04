@@ -6,7 +6,7 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { AuthApi } from './api/auth-api.service';
 import { SidebarComponent } from './layout/sidebar.component';
 import { AccountModalComponent } from './layout/account-modal.component';
-import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP } from './layout/nav-items';
+import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP, NAV_GROUP_BY_PATH, NAV_GROUP_LABELS } from './layout/nav-items';
 
 @Component({
   selector: 'app-layout',
@@ -68,6 +68,11 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
 
       <!-- Main Content -->
       <main class="main-content">
+        <!-- Desktop top bar (the mobile header above covers narrow viewports). -->
+        <header class="top-bar">
+          <span class="top-bar-title">{{ headerTitle() }}</span>
+          <span class="top-bar-section">{{ currentSectionLabel() }}</span>
+        </header>
         <!-- The routed page lives in a wrapper that carries this component's
              style-encapsulation attribute, so the shell can actually give it
              the leftover vertical space (a rule targeting the routed host
@@ -114,10 +119,10 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     /* Fixed full-width top bar; the app shell is shifted down by --imp-h so the
        fixed sidebar and main scroll region clear it (the var inherits through
        the DOM, so both this component and the sidebar read the same offset). */
-    .impersonation-banner { position: fixed; top: 0; left: 0; right: 0; min-height: 40px; z-index: 400; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.5rem 1rem; background: var(--color-warning-900); color: var(--color-white); font-size: var(--font-size-sm); flex-wrap: wrap; }
-    .impersonation-banner .imp-text { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .impersonation-banner { position: fixed; top: 0; left: 0; right: 0; min-height: var(--space-8); z-index: 400; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: var(--space-4); padding: var(--space-2) var(--space-4); background: var(--color-warning-900); color: var(--color-white); font-size: var(--font-size-sm); flex-wrap: wrap; }
+    .impersonation-banner .imp-text { display: inline-flex; align-items: center; gap: var(--space-1-5); }
     .impersonation-banner strong { font-weight: 700; }
-    .impersonation-banner .imp-exit { padding: 0.3rem 0.9rem; background: var(--color-white); color: var(--color-warning-900); border: none; border-radius: var(--radius-sm); font-size: var(--font-size-sm); font-weight: 700; cursor: pointer; }
+    .impersonation-banner .imp-exit { padding: var(--space-1) var(--space-3-5); background: var(--color-white); color: var(--color-warning-900); border: none; border-radius: var(--radius-sm); font-size: var(--font-size-sm); font-weight: 700; cursor: pointer; }
     .impersonation-banner .imp-exit:hover { background: var(--color-error-bg); }
     .layout {
       display: flex;
@@ -133,18 +138,18 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       top: 0;
       left: 0;
       right: 0;
-      height: 56px;
-      background: white;
-      border-bottom: 1px solid var(--color-border);
-      padding: 0 1rem;
+      height: var(--top-bar-height);
+      background: var(--color-white);
+      border-bottom: var(--border-width) solid var(--color-border);
+      padding: 0 var(--space-4);
       align-items: center;
       z-index: 100;
       box-shadow: var(--shadow-nav);
     }
 
     .menu-btn {
-      width: 44px;
-      height: 44px;
+      width: var(--touch-target);
+      height: var(--touch-target);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -167,14 +172,14 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
 
     .mobile-lang-toggle {
       display: flex;
-      gap: 0.125rem;
+      gap: var(--space-0-5);
       background: var(--color-bg-tertiary);
-      padding: 2px;
+      padding: var(--focus-ring-width);
       border-radius: var(--radius-sm);
     }
 
     .mobile-lang-btn {
-      padding: 0.25rem 0.5rem;
+      padding: var(--space-1) var(--space-2);
       font-size: var(--font-size-xs);
       font-weight: 600;
       color: var(--color-text-secondary);
@@ -183,11 +188,11 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       border-radius: var(--radius-xs);
       cursor: pointer;
       transition: all 0.15s;
-      min-height: 28px;
+      min-height: var(--control-height-sm);
     }
 
     .mobile-lang-btn.active {
-      background: white;
+      background: var(--color-white);
       color: var(--color-primary);
       box-shadow: var(--shadow-card);
     }
@@ -195,7 +200,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     /* Main Content */
     .main-content {
       flex: 1;
-      margin-left: 260px;
+      margin-left: var(--sidebar-width);
       padding: 0;
       overflow-y: auto;
       overflow-x: hidden;
@@ -211,6 +216,34 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     }
 
     .main-content > * { min-height: 0; }
+
+    /* Desktop top bar — shared shell chrome above every routed page. */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: var(--top-bar-height);
+      padding: 0 var(--space-6);
+      background: var(--color-surface);
+      border-bottom: var(--border-width) solid var(--color-border);
+      box-shadow: var(--shadow-nav);
+    }
+    .top-bar-title {
+      font-family: var(--font-display);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    .top-bar-section {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-secondary);
+    }
 
     /* The routed page absorbs the remaining space so short pages still paint
        their background down to the footer (grow, never shrink — tall pages keep
@@ -273,7 +306,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: var(--color-overlay);
       z-index: 150;
     }
 
@@ -284,9 +317,9 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       bottom: 0;
       left: 0;
       right: 0;
-      height: 64px;
-      background: white;
-      border-top: 1px solid var(--color-border);
+      height: var(--bottom-nav-height);
+      background: var(--color-white);
+      border-top: var(--border-width) solid var(--color-border);
       padding-bottom: env(safe-area-inset-bottom);
       z-index: 100;
       box-shadow: var(--shadow-header);
@@ -298,11 +331,11 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.25rem;
+      gap: var(--space-1);
       color: var(--color-text-secondary);
       font-size: var(--font-size-xs);
       font-weight: 500;
-      min-height: 48px;
+      min-height: var(--space-9);
       transition: color 0.15s;
       text-decoration: none;
     }
@@ -311,8 +344,8 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     .bottom-nav-item.active { color: var(--color-primary); }
 
     .bottom-nav-icon {
-      width: 22px;
-      height: 22px;
+      width: var(--icon-size-md);
+      height: var(--icon-size-md);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -322,12 +355,13 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     @media (max-width: 768px) {
       .mobile-header { display: flex; }
       .mobile-overlay { display: block; }
+      .top-bar { display: none; }
 
       .main-content {
         margin-left: 0;
         padding: 0;
-        padding-top: 56px;
-        padding-bottom: calc(64px + env(safe-area-inset-bottom));
+        padding-top: var(--top-bar-height);
+        padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
         height: 100svh;
         height: 100vh;
         overflow-x: hidden;
@@ -346,6 +380,9 @@ export class LayoutComponent implements OnInit {
    *  then fits the shell exactly instead of growing past it, so the chat
    *  message list clamps to the viewport and the composer stays visible. */
   routedAreaFits = signal(false);
+
+  /** Nav-group label (Vendor / Customer / Admin / Main) of the current route, shown in the top bar. */
+  currentSectionLabel = signal('');
 
   auth = inject(AuthService);
   private route = inject(ActivatedRoute);
@@ -390,6 +427,8 @@ export class LayoutComponent implements OnInit {
     // admin research chat. Every other admin tab keeps the normal
     // grow-never-shrink behaviour so long tables can scroll the shell.
     this.routedAreaFits.set(path.startsWith('/admin/research-chat'));
+    const group = NAV_GROUP_BY_PATH[path] ?? (path.startsWith('/admin') ? 'admin' : 'main');
+    this.currentSectionLabel.set(NAV_GROUP_LABELS[group]);
   }
 
   ngOnInit() {

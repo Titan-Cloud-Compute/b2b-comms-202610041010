@@ -13,7 +13,7 @@ interface Channel {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div data-testid="channels-screen">
+    <div class="page" data-testid="channels-screen">
       <h1>Channels</h1>
 
       <!-- Create channel form -->
@@ -30,10 +30,9 @@ interface Channel {
         } @else {
           @for (channel of channels(); track channel.id) {
             <div
-              class="channel-item"
+              class="channel-item list-item-action"
               [class.selected]="selectedChannelId() === channel.id"
               (click)="selectChannel(channel.id)"
-              style="cursor:pointer;padding:4px 8px;"
             >
               {{ channel.name }}
             </div>

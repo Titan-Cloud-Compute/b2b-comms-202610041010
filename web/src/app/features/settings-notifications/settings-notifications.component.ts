@@ -15,7 +15,7 @@ const PREFERENCES_PATH = 'notifications/preferences';
   standalone: true,
   imports: [],
   template: `
-    <div data-testid="settings-notifications-screen">
+    <div class="page" data-testid="settings-notifications-screen">
       <h1>Notification Settings</h1>
 
       <form (submit)="$event.preventDefault(); save()">

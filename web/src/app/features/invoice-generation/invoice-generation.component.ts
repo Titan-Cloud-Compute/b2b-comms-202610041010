@@ -26,7 +26,7 @@ function registerInvoiceMocks(client: MockApiClient): void {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <section data-testid="invoices-screen">
+    <section class="page" data-testid="invoices-screen">
       <h1>Invoices</h1>
 
       <form data-testid="invoice-generate-form" (ngSubmit)="generate()">
